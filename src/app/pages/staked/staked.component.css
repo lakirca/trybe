@@ -1,0 +1,164 @@
+.portfolio-header {
+  color: #acadb7;
+  font-size: 16px;
+  justify-content: flex-start;
+}
+
+.portfolio-header-container{
+  background: #262631;
+  height: 50px;
+  width: 100%;
+  padding: 13px;
+  display: block;
+}
+
+.account {
+ background: #ffffff!important;
+}
+
+
+.portfolio-chip-back {
+  background: #21212b;
+  color: #777682;
+  min-height: 18px;
+  font-size: 12px;
+}
+
+mat-chip-list{
+  justify-content: flex-end;
+  float: right;
+  margin: 4px;
+}
+
+.portfolio-grid-container{
+  height: calc(76vh)!important;
+  padding: 0 30px;
+  background: #2c2c39;
+}
+
+.portfolio-grid{
+  background: #2c2c39;
+  padding: 30px;
+  height: calc(80%)!important;
+}
+
+.portfolio-grid-item{
+  background: #2c2c39;
+  margin: 0px;
+  /*padding: 5px;*/
+  height: 340px;
+}
+
+.container-text{
+  color: #64646d;
+  margin: 3px 0;
+  font-size: 12px;
+}
+
+.container-header{
+  height: 10%;
+  padding: 10px 0px;
+}
+
+.portfolio-card {
+  background: #333440;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  margin: 6px;
+  padding: 0px 20px 25px 20px;
+}
+
+mat-card-header{
+  justify-content: left;
+  color: #6b747d;
+  padding: 10px 0 0 0;
+  height: 15%;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.portfolio-card-header{
+  text-transform: uppercase;
+  margin-bottom: -30px;
+}
+
+button{
+  background: #00d8b4;
+  color: #0d695a;
+  text-transform: uppercase;
+  width: 100px;
+  margin-right: 10px;
+}
+
+button.unstake {
+  background: #dc3545;
+  color: #fff;
+}
+
+.liquid {
+  border-bottom: 1px solid #000;
+  margin-bottom: 10px;
+  padding-bottom: 45px;
+}
+
+.progress-bar:not(.balance-bar) {
+  border-top: 4px solid #202029;
+  border-bottom: 4px solid #202029;
+}
+
+.float-right {
+  float: right;
+}
+
+
+.m-b-20.black {
+  font-weight: bold;
+}
+
+.portfolio-card-content-element{
+  width: 100%;
+  height: 40px;
+  padding-top: 10px;
+}
+
+.portfolio-grid-item.info .content-element-header {
+  color: #ffffff;
+}
+
+.portfolio-grid-item.info .content-element-text{
+  color: #34cba1;
+}
+
+.content-element-description {
+  color: #48b7de;
+  font-size: 15px;
+}
+
+.content-element-header{
+  color: #6b747d;
+  font-size: 16px;
+  margin: 3px 0;
+  float: left;
+}
+
+.content-element-text{
+  color: #6b747d;
+  font-size: 14px;
+  margin: 3px 0;
+  font-weight: bold;
+  float: right;
+}
+
+mat-card-content{
+  padding: 10px 0px;
+  height: 70%;
+}
+
+
+mat-card-footer{
+  justify-content: center;
+  text-align: center;
+  margin: 0px;
+  height: 15%;
+}

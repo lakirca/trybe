@@ -1,0 +1,17 @@
+<mat-card class="buy-ram-dialog">
+	<mat-card-header>
+		<h1 mat-dialog-title class="title">Pay <span class="type">{{data.type}}</span> for {{data.name}}</h1>
+	</mat-card-header>
+	<mat-card-content>
+		<mat-label>
+			Write amount which you want to pay (In EOS).
+		</mat-label>
+		<input matInput placeholder="{{data.type}} amount" value="0" [(ngModel)]="amount" class="placeholder">
+	</mat-card-content>
+	<mat-card-footer>
+		<div mat-dialog-actions align="end">
+			<button mat-button (click)="buy()">Buy <span class="type">{{data.type}}</span></button>
+			<button mat-button (click)="onNoClick()">Close</button>
+		</div>
+	</mat-card-footer>
+</mat-card>

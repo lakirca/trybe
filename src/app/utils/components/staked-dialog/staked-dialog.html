@@ -1,0 +1,9 @@
+<img class="eos-icon" src="./assets/img/trybe-icon.png" alt="EOS-icon" style="float: left;height: 40px;margin-right: 10px;"><h1 mat-dialog-title class="title">Stake Trybe</h1>
+<div mat-dialog-content>
+  <input class="form-control m-b-20" type="number" id="stakeAmount" [(ngModel)]="stakedAmount" placeholder="Enter Stake Amount"/>
+  <p style="float: right; margin: -20px 40px 0px 0px; color: #469078; cursor: pointer;" (click)="stakeAll()">Stake All</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="stakedTokens()">Stake</button>
+  <button mat-button (click)="onNoClick()">Close</button>
+</div>

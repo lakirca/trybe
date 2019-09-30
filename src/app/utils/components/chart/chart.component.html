@@ -1,0 +1,447 @@
+<div class="container">
+  <div class="row rowOne justify-content-center">
+    <div class="col2 col-md-12 col-sm-12">
+      <h1 *ngIf="chart.chartStatus" class="text-center">
+        Top 5 Tokens by Amount
+      </h1>
+    </div>
+    <div class="col-lg-7 col-md-9 col-sm-12">
+      <div class="chart-wrapper doughnut" [hidden]="!chart.chartTypePie">
+        <!--
+          <canvas class="myCanvas" (mouseenter)="chartEntered()" #myCanvas baseChart width="430px" height="430px" [data]="menu.chartData" [chartType]="menu.chartType" [options]="options" [colors]="lineChartColors" [labels]="menu.chartLabels">
+        -->
+        <div class="spinner">
+          <ngx-spinner bdColor="rgba(77,212,182,0)" color="rgb(77,212,182)"
+            ><p class="pulsate pulsate2">
+              Loading chart, please wait...
+            </p></ngx-spinner
+          >
+        </div>
+        <!-- <app-msig></app-msig> -->
+        <canvas
+          id="canvas"
+          class="myCanvas"
+          (mousemove)="chartEntered($event)"
+          #myCanvasPie
+          width="430px"
+          height="430px"
+        >
+          {{ chart.chartPie }}
+        </canvas>
+        <div *ngIf="chart.chartStatus" class="titleDiv">
+          {{ !chart.val ? '' : (chart.val | numPipe)
+          }}{{ !chart.val ? '' : chart.pipe }} <br />
+          <span class="tokenName">{{ chart.tokenName }}</span>
+        </div>
+      </div>
+      <div class="chart-wrapper" [hidden]="chart.chartTypePie">
+        <canvas
+          id="canvas2"
+          class="myCanvas"
+          #myCanvasLine
+          width="430px"
+          height="430px"
+        >
+          {{ chart.chartLine }}
+        </canvas>
+      </div>
+      <div class="chart-wrapper">
+        <h2 *ngIf="chart.showTable">
+          {{ !chart.count ? '-' : (chart.count | currency: 'USD':true) }} -
+          total USD value
+        </h2>
+      </div>
+    </div>
+    <div class="col-lg-5 col-md-7 col-sm-12">
+      <div class="chart-buttons" *ngIf="chart.showTable">
+        <div
+          class="chartSwitch chartSwitch-curency"
+          [ngClass]="chartSwithClass"
+          *ngIf="chart.showTable"
+        >
+          <button
+            class="chartButton typeButton"
+            (click)="tokenType('usd')"
+            [ngClass]="chart.showTypeUsd ? 'selected' : ' '"
+          >
+            Usd
+          </button>
+          <button
+            class="chartButton typeButton"
+            (click)="tokenType('eos')"
+            [ngClass]="chart.showTypeEos ? 'selected' : ' '"
+          >
+            Eos
+          </button>
+          <button
+            class="chartButton typeButton"
+            (click)="tokenType('amount')"
+            [ngClass]="chart.showTypeAmount ? 'selected' : ' '"
+          >
+            Amount
+          </button>
+        </div>
+        <div
+          class="chartSwitch"
+          *ngIf="chart.showTable"
+          [ngClass]="chart.chartType"
+        >
+          <button
+            class="chartButton"
+            (click)="showGraph()"
+            [ngClass]="chart.chartTypePie ? '' : 'selected'"
+          >
+            <svg
+              aria-hidden="true"
+              data-prefix="far"
+              data-icon="chart-area"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+              class="svg-inline--fa fa-chart-area fa-w-16"
+            >
+              <path
+                fill="currentColor"
+                d="M500 400c6.6 0 12 5.4 12 12v24c0 6.6-5.4 12-12 12H12c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h24c6.6 0 12 5.4 12 12v324h452zM372 128.7l-84 56-85.1-85.1c-5.5-5.5-14.8-4.4-18.8 2.3L96 256v96h384l-90.3-218.1c-3-6.9-11.5-9.4-17.7-5.2zM144 269.3l57.5-103.2 80.4 80.4c71.8-47.9 8.2-5.4 80.7-53.8L407.2 304H144v-34.7z"
+                class=""
+              ></path>
+            </svg>
+            Graph
+          </button>
+          <button
+            class="chartButton"
+            (click)="showPie()"
+            [ngClass]="chart.chartTypePie ? 'selected' : ''"
+          >
+            <svg
+              aria-hidden="true"
+              data-prefix="far"
+              data-icon="chart-pie-alt"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+              class="svg-inline--fa fa-chart-pie-alt fa-w-16"
+            >
+              <path
+                fill="currentColor"
+                d="M461.29 288H224V50.71c0-8.83-7.18-16.21-15.74-16.21-.7 0-1.4.05-2.11.15C87.08 51.47-3.96 155.43.13 280.07 4.2 404.1 107.91 507.8 231.93 511.87c2.69.09 5.39.13 8.07.13 121.04 0 220.89-89.66 237.35-206.16 1.33-9.45-6.52-17.84-16.06-17.84zM240 464c-2.15 0-4.33-.04-6.5-.11-98.98-3.25-182.15-86.42-185.4-185.4C45.31 193.22 98.36 118.35 176 91.14V336h244.78C394.15 411.06 322.06 464 240 464zM288.8.04c-.35-.03-.7-.04-1.04-.04C279.1 0 272 7.44 272 16.23V240h223.77c9.14 0 16.82-7.69 16.2-16.8C503.72 103.74 408.26 8.28 288.8.04z"
+                class=""
+              ></path>
+            </svg>
+            Pie
+          </button>
+        </div>
+      </div>
+      <div class="row align-items-center token" *ngIf="!chart.showTable">
+        <div class="loadData">
+          <p class="pulsate">Getting Data, please wait...</p>
+        </div>
+      </div>
+      <div class="row align-items-center token" *ngIf="chart.showTable">
+        <div class="tokenDiv" *ngIf="chart.showTypeAmount">
+          <div
+            class="tokenRow"
+            [ngClass]="a.name"
+            *ngFor="let a of (chart.amountResult | slice: 0:6); let q = index"
+          >
+            <div class="li" (click)="tokenClick(q)">
+              <span class="tName">{{ a.name }}</span>
+              <span title="{{a.amount | number: '1.1-4'}}" class="tVal">
+                {{ a.amount | numPipe }} {{ chart.pipe }}
+              </span>
+              <span class="delete" (click)="delete(q)">remove</span>
+            </div>
+          </div>
+          <div class="tokenRow" *ngIf="chart.isDeleted">
+            <div
+              class="liDeleted"
+              [ngClass]="d.name"
+              *ngFor="let d of (chart.deletedTokens | slice: 0:1)"
+            >
+              <div class="restore" (click)="restore(d)"></div>
+              <div class="restoreName">{{ d.name }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="tokenDiv" *ngIf="chart.showTypeUsd">
+          <div
+            class="tokenRow"
+            [ngClass]="b.name"
+            *ngFor="let b of (chart.usdResult | slice: 0:6); let w = index"
+          >
+            <div class="li" (click)="tokenClick(w)">
+              <span class="tName">{{ b.name }}</span>
+              <span title="{{b.totalPrice | number: '1.1-4'}}" class="tVal">
+                {{ b.totalPrice | numPipe }} {{ chart.pipe }}
+              </span>
+              <span class="delete" (click)="delete(w)">remove</span>
+            </div>
+          </div>
+          <div class="tokenRow" *ngIf="chart.isUsdDeleted">
+            <div
+              class="liDeleted"
+              [ngClass]="m.name"
+              *ngFor="let m of (chart.delUsd | slice: 0:1)"
+            >
+              <div class="restore" (click)="restore(m)"></div>
+              <div class="restoreName">{{ m.name }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="tokenDiv" *ngIf="chart.showTypeEos">
+          <div
+            class="tokenRow"
+            [ngClass]="o.name"
+            *ngFor="let o of (chart.eosResult | slice: 0:6); let u = index"
+          >
+            <div class="li" (click)="tokenClick(u)">
+              <span class="tName">{{ o.name }}</span>
+              <span title="{{o.eosVal | number: '1.1-4'}}" class="tVal">
+                {{ o.eosVal | numPipe }} {{ chart.pipe }}
+              </span>
+              <span class="delete" (click)="delete(u)">remove</span>
+            </div>
+          </div>
+          <div class="tokenRow" *ngIf="chart.isEosDeleted">
+            <div
+              class="liDeleted"
+              [ngClass]="h.name"
+              *ngFor="let h of (chart.delEos | slice: 0:1)"
+            >
+              <div class="restore" (click)="restore(h)"></div>
+              <div class="restoreName">{{ h.name }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row rowTwo" *ngIf="!chart.showTable">
+    <div class="loadData">
+      <p class="pulsate">Getting Data, please wait...</p>
+    </div>
+  </div>
+</div>
+<div class="container2">
+  <div class="row rowTwo" *ngIf="chart.showTable">
+    <div class="table-header">
+      <input
+        *ngIf="chart.showSearch"
+        class="search tableSearch"
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Search.."
+      />
+      <div class="te-button" (click)="toggleDiv()">{{ chart.all }}</div>
+      <div class="te-button" (click)="toggleZero()">{{ chart.zero }}</div>
+      <div class="dropdown">
+        <div class="te-button " (click)="exportToExcel()">Export</div>
+        <div class="dropdown-content">
+          <a (click)="exportToExcel()">Export To Excel</a>
+          <a (click)="exportToCsv()">Export to CSV</a>
+        </div>
+      </div>
+    </div>
+    <div class="tokenTable">
+      <table>
+        <thead>
+          <tr>
+            <th class="titleH">TOKEN</th>
+            <th class="titleH"></th>
+            <th class="titleH"></th>
+            <th
+              class="titleH colHide"
+              (onmouseenter)="x()"
+            >
+              LIQUID
+            </th>
+            <th
+              class="titleH staked colHide"
+              >
+              <!-- (onmouseenter)="x()" -->
+              STAKED
+              <span class="stakedSpan">More tokens to be added</span>
+            </th>
+            <th class="titleH" (click)="sortTotal()">TOTAL</th>
+            <th class="titleH" (click)="sortPrice()">PRICE</th>
+            <th class="titleH" (click)="sortTotalEos()">TOTAL EOS VALUE</th>
+            <th class="titleH" (click)="sortTotalUSD()">TOTAL USD VALUE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            class="line"
+            *ngFor="
+              let x of (chart.total | searchFilter: { name: searchText });
+              let i = index
+            "
+          >
+            <td class="center">
+              <img
+                class="tokenImg"
+                src="{{!x.url ? chart.placeholder : x.url}}"
+              />
+            </td>
+            <td class="left  ">{{ x.name }}</td>
+            <td class="left  ">
+              <img class="divImg" src="{{!x.dividend ? '' : chart.divImg}}" />
+              <img class="intImg" src="{{!x.isInt ? '' : chart.intImg}}" />
+              <img class="utilImg" src="{{!x.isUtil ? '' : chart.utilImg}}" />
+              <img class="rewarededImg" src="{{!x.isRewarded ? '' : chart.rewardedImg}}" />
+              <img
+                class="stakedImg"
+                src="{{ !x.isStaked ? '' : chart.stakedImg}}"
+              />
+            </td>
+            <td
+              title="{{x.value | number: '1.1-4'}}"
+              class="center pointer  colHide"
+            >
+              {{ !x.value ? '0.00' : x.value | numPipe }}
+            </td>
+            <td
+              title="{{x.staked | number: '1.1-4'}}"
+              class="center pointer  colHide"
+            >
+              {{ !x.staked ? 'N/A' : (x.staked | numPipe) }}
+            </td>
+            <td
+              title="{{x.total | number: '1.1-4'}}"
+              class="center pointer  hiddenCol"
+              >
+              <!-- (mouseenter)="onHover()" -->
+              {{ !x.total ? '0.00' : (x.total | numPipe) }}
+              <div class="hovered">
+                <p>Liquid: {{ x.value | numPipe }}</p>
+                <p>Staked: {{ !x.staked ? 'N/A' : (x.staked | numPipe) }}</p>
+              </div>
+            </td>
+            <td title="{{x.price | number: '1.1-4'}}" class="center pointer">
+              {{ x.price | currency: 'USD':true }}
+            </td>
+            <td title="{{x.eosVal | number: '1.1-4'}}" class="center pointer">
+              {{
+                x.eosVal < 0.01 && x.eosVal != 0
+                  ? '> 0.00'
+                  : (x.eosVal | number: '1.2-2')
+              }}
+            </td>
+            <td
+              title="{{x.totalPrice | number: '1.1-4'}}"
+              class="center pointer"
+            >
+              ${{ x.totalPrice | numPipe }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!--
+        <div class="row line1 justify-content-center">
+          <div class="col titleH">TOKEN</div>
+          <div class="col titleH"></div>
+          <div class="col titleH"></div>
+          <div
+            class="col titleH colHide"
+            (onmouseenter)="x()"
+            (onmouseleave)="x()"
+          >
+            LIQUID
+          </div>
+          <div
+            class="col titleH staked colHide"
+            (onmouseenter)="x()"
+            (onmouseleave)="x()"
+          >
+            STAKED
+          </div>
+          <div class="col titleH" (click)="sortTotal()">TOTAL</div>
+          <div class="col titleH" (click)="sortPrice()">PRICE</div>
+          <div class="col titleH" (click)="sortTotalEos()">TOTAL EOS VALUE</div>
+          <div class="col titleH" (click)="sortTotalUSD()">TOTAL USD VALUE</div>
+        </div>
+      -->
+
+      <!--
+        <div
+          class="row line justify-content-center"
+          *ngFor="
+            let x of (chart.total | searchFilter: { name: searchText });
+            let i = index
+          "
+        >
+          <div class="col title2">
+            <img class="tokenImg" src="{{!x.url ? chart.placeholder : x.url}}" />
+          </div>
+          <div class="col left title2">{{ x.name }}</div>
+          <div class="col left title2">
+            <img class="divImg" src="{{!x.dividend ? '' : chart.divImg}}" />
+            <img class="divImg" src="{{!x.isInt ? '' : chart.intImg}}" />
+            <img class="stakedImg" src="{{!x.isStaked ? '' : chart.stakedImg}}" />
+          </div>
+          <div
+            title="{{x.value | number: '1.1-4'}}"
+            class="col center pointer title2 colHide"
+          >
+            {{ x.value | numPipe }}
+          </div>
+          <div
+            title="{{x.staked | number: '1.1-4'}}"
+            class="col center pointer title2 colHide"
+          >
+            {{ !x.staked ? 'N/A' : (x.staked | numPipe) }}
+          </div>
+          <div
+            title="{{x.value | number: '1.1-4'}}"
+            class="col center pointer title2 hiddenCol"
+            (mouseenter)="onHover()"
+          >
+            {{ !x.total ? 'N/A' : (x.total | numPipe) }}
+            <p class="hovered">Liquid: {{ x.value | numPipe }}</p>
+            <p class="hovered">
+              Staked: {{ !x.staked ? 'N/A' : (x.staked | numPipe) }}
+            </p>
+          </div>
+          <div
+            title="{{x.price | number: '1.1-4'}}"
+            class="col  center pointer title2"
+          >
+            {{ x.price | currency: 'USD':true }}
+          </div>
+          <div
+            title="{{x.eosVal | number: '1.1-4'}}"
+            class="col  center pointer title2"
+          >
+            {{
+              x.eosVal < 0.01 && x.eosVal != 0
+                ? '> 0.00'
+                : (x.eosVal | number: '1.2-2')
+            }}
+          </div>
+          <div
+            title="{{x.totalPrice | number: '1.1-4'}}"
+            class="col center pointer title2"
+          >
+            ${{ x.totalPrice | numPipe }}
+          </div>
+        </div>
+      -->
+    </div>
+    <div class="row4">
+      <div class="legend">
+        <div class="legend-item">
+          <img src="../../../../assets/img/dividend.png" />
+          <p>- this token gives dividends to holders</p>
+        </div>
+        <div class="legend-item">
+          <img src="../../../../assets/img/interesticon.png" />
+          <p>- interest can be earn with this token</p>
+        </div>
+        <div class="legend-item">
+          <img src="../../../../assets/img/banking.png" />
+          <p>- this token allows tokens to be staked</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mat-form-field {
+    width: 300px;
+    padding: 20px;
+}
+
+mat-label {
+    width: 150px;
+}
+
+.expiration-time {
+    width: 100px;
+}
+
+mat-accordion {
+    background: #33333f;
+    color: #84848b;
+}
+
+mat-list-item {
+    padding: 20px;
+}
+
+.chip-list-propose {
+    width: 100%;
+    background: #33333f;
+}
+
+.chip-list-propose-params {
+    width: 100%;
+    background: #33333f;
+}
+
+.mat-list .mat-list-item {
+    padding: 20px
+}
+
+.mat-expansion-panel-header {
+    background: #33333f;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-label {
+    color: #fcfcfc
+}
+
+.mat-expansion-panel-header-title {
+    color: #fcfcfc
+}
+
+.mat-expansion-indicator::after, .mat-expansion-panel-header-description {
+    color: #fcfcfc
+}
+
+.mat-input-element {
+    color: #fcfcfc;
+}
+
+::placeholder {
+    color: #fcfcfc;
+    opacity: 1;
+}
+
+.button-msig{
+    background: #4dd4b6;
+    text-transform: uppercase;
+    margin: 0 auto;
+}
+
+.div-to-button-msig{
+    text-align: center;
+}

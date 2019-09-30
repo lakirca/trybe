@@ -1,0 +1,365 @@
+#topnav {
+  padding: 35px 20px;
+  background-color: #262630;
+  box-shadow: none;
+  width: 100%;
+}
+
+#topnav li {
+  list-style-type: none;
+}
+
+.header-scatter-login img {
+  max-width: 40px;
+  max-height: 50px;
+  margin-left: 10px;
+}
+
+.logo {
+  margin-left: auto;
+}
+
+.mobile-menu {
+  left: 0;
+  top: 52px;
+  width: 100%;
+  position: fixed;
+}
+
+.mobile-menu.opened {
+  display: block;
+}
+
+.mobile-menu.closed {
+  display: none;
+}
+
+.mobile-menu ul {
+  width: 100%;
+  margin: 0;
+  padding-top: 20px;
+  display: block;
+  height: 100vh;
+  background-color: #2c2c38;
+}
+
+.mobile-menu ul li {
+  display: block;
+  text-align: center;
+}
+
+.menu-toggle {
+  opacity: 0.6;
+  color: #ffffff;
+  margin-left: auto;
+  align-self: center;
+  cursor: pointer;
+}
+.menu-toggle:hover {
+  color: #5cd4b4;
+}
+@media (min-width: 1025px) {
+  .mobile-menu.opened,
+  .menu-toggle {
+    display: none;
+  }
+}
+
+.username {
+  float: right;
+  width: 100%;
+  height: 30px;
+  color: #5cd4b4;
+  background: none;
+  margin-top: -10px;
+}
+
+.username h3 {
+  text-align: right;
+  margin-right: 10px;
+}
+
+.header-scatter-login button {
+  float: right;
+  color: #fff;
+  background: none;
+}
+
+#topnav {
+  position: relative;
+  right: 0;
+  left: 0;
+  top: 0;
+  z-index: 1030;
+  background-color: #2c2c38;
+  border: 0;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+/*#topnav {*/
+/*right: 0;*/
+/*left: 0;*/
+/*top: 0;*/
+/*z-index: 1030;*/
+/*background-color: #2c2c38;*/
+/*border: 0;*/
+/*-webkit-transition: all .5s ease;*/
+/*transition: all .5s ease;*/
+/*min-height: 60px;*/
+/*box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0 0 rgba(0, 0, 0, 0.02);*/
+/*}*/
+
+#topnav .topbar-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  -webkit-app-region: drag;
+  background-color: transparent;
+  z-index: 9999;
+}
+
+#topnav .menu-extras {
+  /* margin-left: auto; */
+}
+
+/* @media (min-width: 992px) {
+  #topnav #navigation {
+    display: block !important;
+  }
+} */
+
+#topnav .navigation-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+#topnav .navigation-menu > li {
+  margin-right: 0;
+}
+
+#topnav .navigation-menu > li {
+  display: inline-block;
+  position: relative;
+}
+
+@media (min-width: 992px) {
+  #topnav .navigation-menu > li:first-of-type a {
+    padding-left: 0px;
+  }
+}
+
+@media (min-width: 992px) {
+  #topnav .navigation-menu > li > a {
+    padding-top: 22px;
+    padding-bottom: 22px;
+  }
+}
+
+#topnav .navigation-menu > li > a {
+  cursor: pointer;
+  opacity: 0.6;
+  display: block;
+  color: #ffffff;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  line-height: 20px;
+  padding: 11px 15px;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+#topnav .navigation-menu > li > a:hover {
+  text-decoration: none;
+  color: #5cd4b4;
+  opacity: 1;
+}
+
+a#reloadData {
+  color: #a0a0a0 !important;
+}
+
+#topnav .navbar-topbar .nav-link {
+  color: #ffffff;
+  font-weight: normal;
+  opacity: 0.5;
+  margin-top: 12px;
+  line-height: 1;
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 14px;
+  display: inline-block;
+  background-color: #202029;
+}
+
+.profile-dropdown {
+  width: 170px;
+}
+
+.dropdown-menu {
+  box-shadow: 0 0px 24px 0 rgba(43, 61, 81, 0.06),
+    0 1px 0px 0 rgba(43, 61, 81, 0.02);
+  border: 1px solid rgba(43, 61, 81, 0.05);
+}
+
+.dropdown-menu-right {
+  right: 0;
+  left: auto;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  margin: 0.125rem 0 0;
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+
+.dropdown-item {
+  font-size: 0.9rem;
+}
+
+.notification-list .notify-item {
+  padding: 10px 20px;
+}
+
+.profile-dropdown i {
+  font-size: 17px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.profile-dropdown span {
+  vertical-align: middle;
+}
+
+.notification-list {
+  margin-left: 0 !important;
+}
+
+.header-scatter-login {
+  /*margin: 10px;*/
+  /*padding: 10px;*/
+  /* text-align: right; */
+  /* right: 0px; */
+  /* margin-right: 0px; */
+  /* width: 100%; */
+  /* align-items: end; */
+
+  /*display: flex;*/
+  justify-content: flex-end;
+  flex-direction: row;
+}
+
+button {
+  background: #4dd4b6;
+  /*margin: 15px;*/
+  float: right;
+}
+
+#topnav li {
+  list-style-type: none;
+}
+
+.mat-chip-list-wrapper {
+  display: inherit;
+}
+
+.name-chip {
+  cursor: pointer;
+  background: #262631;
+  color: #929298;
+  float: right;
+}
+
+mat-icon {
+  background-repeat: no-repeat;
+  display: inline-block;
+  fill: currentColor;
+  height: 18px;
+  width: 18px;
+  /*margin: 3px;*/
+  font-size: 15px;
+}
+
+@media (min-width: 1025px) {
+  #topnav .logo {
+    display: none;
+  }
+}
+@media (max-width: 1024px) {
+  #topnav {
+    display: flex;
+    padding: 60px 20px 0;
+    justify-content: space-between;
+  }
+  #topnav .logo {
+    left: 20px;
+    margin: 0 auto;
+    position: relative;
+  }
+  #topnav .topbar-main {
+    z-index: 999;
+    top: 110px;
+    left: 0;
+    width: 100%;
+    min-height: calc(100vh - 100px);
+    position: fixed;
+    display: none;
+    background-color: #2c2c38;
+  }
+  #topnav .topbar-main.opened {
+    display: block;
+  }
+  #topnav .topbar-main.opened .menu-toggle {
+    color: #e53843;
+  }
+  #topnav .navigation-menu {
+    display: block;
+    text-align: center;
+    padding-left: 0 !important;
+  }
+  #topnav .navigation-menu > li {
+    display: block;
+  }
+  .list-inline {
+    padding-left: 0;
+  }
+  .list-inline-item {
+    text-align: center;
+  }
+  .name-chip {
+    float: none;
+    text-align: center;
+    margin: 0 auto;
+  }
+}

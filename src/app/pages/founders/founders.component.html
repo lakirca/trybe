@@ -1,0 +1,166 @@
+<div>
+	<div class="row" style="padding-top: 10px;">
+		<h2>TRYBE Operations - Key Accounts</h2>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-4 col-lg-4" *ngFor="let acc of complited | accexist:accountsDataObj">
+			<div class="card-box tilebox-one tilebox-small">
+				<div class="m-b-20 black font18 clearfix balance-box liquid-balance-box">
+					<div class="balance-title">
+						<h3 class="title-dark">{{acc}} Details</h3>
+					</div>
+				</div>
+				<div class="clearfix balance-bars">
+					<div class="balance-bar">
+						<div class="m-b-20 balance-title-wrap black clearfix">
+							<div class="balance-title">
+								<div><span class="liquid-icons"><img src="./assets/img/database.png"> </span><span>RAM</span></div>
+								<span class="float-right percentage">{{accountsDataObj[acc].useram | bytes }}</span>
+							</div>
+							<div class="progress">
+								<div class="progress-bar balance-bar" role="progressbar"
+								     [style.width.%]="accountsDataObj[acc].ramuse"
+								     aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+							<p class="resource-value" id="ramResource">{{accountsDataObj[acc].maxram | bytes }} remaining</p>
+						</div>
+					</div>
+					<div class="balance-bar">
+						<div class="m-b-20 balance-title-wrap black clearfix">
+							<div class="balance-title">
+								<div><span class="liquid-icons"><img src="./assets/img/cpu.png"> </span><span>CPU</span></div>
+								<span class="float-right percentage" id="cpuAva">{{accountsDataObj[acc].cpuuse | number}}%</span>
+							</div>
+							<div class="progress">
+								<div class="progress-bar balance-bar" id="cpuProgress" role="progressbar"
+								     [style.width.%]="accountsDataObj[acc].cpuuse"
+								     aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+							<p class="resource-value" id="cpuResource">{{accountsDataObj[acc].maxcpu}} us remaining</p>
+						</div>
+					</div>
+					<div class="balance-bar">
+						<div class="m-b-20 balance-title-wrap black clearfix">
+							<div class="balance-title">
+								<div><span class="liquid-icons"><img src="./assets/img/network.png"> </span><span>NET</span></div>
+								<span class="float-right percentage" id="netAva">{{accountsDataObj[acc].usenet | bytes }}</span>
+							</div>
+							<div class="progress">
+								<div class="progress-bar balance-bar" id="netProgress" role="progressbar"
+								     [style.width.%]="accountsDataObj[acc].netuse"
+								     aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+							<p class="resource-value" id="networkResource">{{accountsDataObj[acc].maxnet | bytes}} remaining</p>
+						</div>
+					</div>
+					<div class="button-bar">
+						<button class="mat-button" (click)="pay(acc, 'ram')"> Buy Ram</button>
+						<button class="mat-button" (click)="pay(acc, 'cpu')"> Delegate CPU</button>
+						<button class="mat-button" (click)="pay(acc, 'net')"> Delegate BW</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12 col-md-4 col-lg-4">
+			<div class="card-box tilebox-one tilebox-small">
+				<div class="m-b-20 black font18 clearfix balance-box liquid-balance-box">
+					<div class="balance-title">
+						<h3 class="title-dark">presale Details</h3>
+					</div>
+				</div>
+				<div class="clearfix balance-bars">
+					<div class="balance-bar">
+						<div class="m-b-20 balance-title-wrap black clearfix">
+							<div class="balance-title">
+								<div>
+									<span class="liquid-icons">
+										<img src="../../../assets/img/2000-px-eosio-logo@2x.png">
+									</span>
+									<span>EOS</span>
+								</div>
+								<span class="float-right percentage">{{presaleData.totalAmountEos | numbertransform:4}}</span>
+							</div>
+						</div>
+					</div>
+					<div class="balance-bar">
+						<div class="m-b-20 balance-title-wrap black clearfix">
+							<div class="balance-title">
+								<div><span class="liquid-icons"><img src="../../../assets/img/trybe-icon.png"> </span><span>TRYBE</span>
+								</div>
+								<span class="float-right percentage" id="cpuAva">{{presaleData.totalAmountTrybe | numbertransform:4}}</span>
+							</div>
+						</div>
+					</div>
+					<div class="balance-bar">
+						<div class="m-b-20 balance-title-wrap black clearfix">
+							<div class="balance-title">
+								<div>
+									<span class="liquid-icons">
+										<img src="../../../assets/img/image1-1.png">
+									</span>
+									<span>Clients</span>
+								</div>
+								<span class="float-right percentage" id="netAva">{{presaleData.totalUniqueAcc | numbertransform:0}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<mat-card>
+		<mat-card-header>
+			<H3>Creating multisignature transactions</H3>
+		</mat-card-header>
+		<mat-card-content>
+			<button mat-button [matMenuTriggerFor]="msig" class="button-selector" id="functionselector">Select function
+			</button>
+			<mat-menu #msig="matMenu" class="functions-list" backdropClass="'functions-list'">
+				<button mat-menu-item (click)="selectTesters()">Add tester</button>
+				<button mat-menu-item (click)="selectFaunders()">Add founder</button>
+				<button mat-menu-item (click)="selectTest()">Transfer EOS (test)</button>
+				<!-- <button mat-menu-item (click)="showToken()">Update Tokens</button> -->
+			</mat-menu>
+			<div class="row" *ngIf="tokens.showTokens">
+				<!-- LIST OF STAKED -->
+				<!-- LIST OF DIVIDEND -->
+				<!-- LIST OF INTREST  -->
+				<!-- LIST OF REWARDED -->
+				<h1>Tokens</h1>
+				<div class="tokenList" *ngFor="let i of listByNames | slice: 0:9">
+					<h6>* {{i}}</h6>
+					<button class="mat-mini-fab	">S</button>
+					<button class="mat-mini-fab	">I</button>
+					<button class="mat-mini-fab	">D</button>
+				</div> <br>
+			</div>
+			<app-msig-steps *ngIf="addtester"
+			                (end)="selectNone()"
+			                [code]="'trybenetwork'"
+			                [action]="'addtester'"
+			                [proposalName]="'addtester'"
+			                [disable]="true"
+			                [foundersAsConfidants]="founders"
+			></app-msig-steps>
+			<app-msig-steps *ngIf="fndrupdate"
+			                (end)="selectNone()"
+			                [code]="'trybenetwork'"
+			                [action]="'fndrupdate'"
+			                [proposalName]="'addfounder'"
+			                [disable]="true"
+			                [foundersAsConfidants]="founders"
+			></app-msig-steps>
+			<app-msig-steps *ngIf="testingTransfer"
+			                (end)="selectNone()"
+			                [code]="'eosio.token'"
+			                [action]="'transfer'"
+			                [proposalName]="'test'"
+			                [disable]="false"
+			                [foundersAsConfidants]="founders"
+			></app-msig-steps>
+		</mat-card-content>
+	</mat-card>
+</div>

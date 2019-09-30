@@ -1,0 +1,406 @@
+<div class="home-contaioner">
+	<br>
+	<div class="row mt-m">
+    <div class="col-xs-12 col-lg-12">
+      <div class="card-box ilebox-one">
+        <p>Pre-sale Bonuses: Each month the top 10 contributors for the month in EOS will share in a 1 million TRYBE bonus! And at the end of the pre-sale the top 20 contributors will share in a 5 million TRYBE bonus! These will be distributed based on the proportionate contributions of each person. Scroll down to see the current winners!</p> 
+      </div>
+
+    </div>
+    <div [ngClass]="{'col-lg-4 ' : name, 'col-lg-12' : !name}" >
+      <div class="card-box tilebox-one" [ngClass]="{'long' : name, 'short' : !name}">
+          <h6 class="title-dark">Current Price</h6>
+          <h4 class="white bold font25 current-price"><span>1 EOS = </span><span id="currentPrice">{{priceTrybeEos | number : '1.0-0'}} TRYBE</span></h4>
+          <div *ngIf="name" class="divider-dark"></div>
+          <input *ngIf="name" [(ngModel)]="buyAmount" class="form-control m-b-20 bg-white" type="number" id="icoAmount" placeholder="Enter Eos Amount"
+                 style="display: block;">
+        <h4 *ngIf="showReferer" style="margin-top:10px">Referal account: {{referName}}</h4>
+          <div *ngIf="name" class="scatter-wrap">
+            <button [disabled]="isActiveButton" (click)="buyTokens()" id="icoBtn" type="button" class="btn btn-primary waves-effect waves-light btn-block"
+                    style="display: block;">Buy Trybe
+            </button>
+            <a href="https://get-scatter.com/" target="_blank" id="getScatter"
+               class="btn btn-primary waves-effect waves-light btn-block" style="display: none;">Get Scatter</a>
+            <button id="loginBtn" type="button" class="btn btn--light btn-primary waves-effect waves-light btn-block"
+                    style="display: none;">Login with scatter
+            </button>
+          </div>
+          <p class="m-b-20" *ngIf="name">The PRESALE token price is US$0.01 per Trybe, you can only buy Trybe using EOS.</p>
+          <p class="m-b-20" *ngIf="name">
+            All pre-sale tokens are automatically staked until July 1st 2019, at which point you will have access to 10%
+            each month for 6 months.
+            <br>
+            <br>After 6 months - all will be available.
+            <br>
+            <br>Pre-sale tokens will be eligible for airdrops.
+          </p>
+        </div>
+      <!--<div class="card-box">-->
+        <!--<div *ngIf="showNewdex" style="text-align: center">-->
+          <!--<h3>TRYBE DEX Prices</h3>-->
+          <!--<div style="width: 50%; float: left;">-->
+            <!--<h3>Newdex</h3>-->
+            <!--<p *ngIf="newdex">{{newdex.last | thousandSuff : 2}} EOS</p>-->
+          <!--</div>-->
+          <!--<div>-->
+            <!--<h3>Chaince</h3>-->
+            <!--<p *ngIf="chaince">{{chaince.price | thousandSuff : 2}} EOS</p>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    </div>
+    <div class="col-lg-8" [ngClass]="{'col-lg-8' : name, 'col-lg-12' : !name}">
+      <div class="col-lg-12 col-xs-12 col-md-12 col-xl-12">
+        <h3>Pre-sale Time Remaining</h3>
+        <countdown [text]="text" units="Month | Days | Hours | Minutes | Seconds"  end="February 1, 2019">
+        </countdown>
+      </div>
+
+      <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card-box tilebox-one">
+          <div class="row">
+            <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 text-left">
+              <h6 class="title-dark">Max Supply</h6>
+
+
+              <p class="mt-s font22"><span id="maxSupply" *ngIf="presaleTotal">{{presaleTotal | thousandSuff : 2}}</span></p>
+            </div>
+            <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 text-left">
+              <h6 class="title-dark">Sold</h6>
+              <p class="mt-s font22"><span id="totalSold" *ngIf="presaleSold">{{presaleSold | thousandSuff : 2}}</span></p>
+            </div>
+            <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 text-left">
+              <h6 class="title-dark">Remaining</h6>
+              <p class="mt-s font22"><span id="totalRemaining" *ngIf="presaleRemaining">{{presaleRemaining | thousandSuff : 2}}</span></p>
+            </div>
+            <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 text-left">
+              <h6 class="title-dark">Complete</h6>
+              <p class="mt-s font22"></p>
+            </div>
+            <div class="col-xl-12">
+              <div class="progress">
+                <div class="progress-triangle progress-triangle-top-left"></div>
+                <div class="progress-triangle progress-triangle-top-right"></div>
+                <div class="progress-triangle progress-triangle-bottom-left"></div>
+                <div class="progress-triangle progress-triangle-bottom-right"></div>
+                <div class="progress-triangle progress-triangle-top-left black"></div>
+                <div class="progress-triangle progress-triangle-top-right black"></div>
+                <div class="progress-triangle progress-triangle-bottom-left black"></div>
+                <div class="progress-triangle progress-triangle-bottom-right black"></div>
+                <div class="progress-bar" id="icoProgress" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                     [style.width.%]="presaleprecent">{{presaleprecent | number : '1.2-2' }}%
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row userblock">
+          <div *ngIf="name" class="col-xs-12 col-md-6 col-lg-6">
+            <div class="card-box tilebox-one tilebox-small">
+              <div class="m-b-20 black font18 clearfix balance-box">
+                <div class="balance-title">
+                  <h4 class="title-dark">Your Presale Tokens
+                    <div class="info-pop">
+                      <div class="info-pop-icon">
+                        <svg aria-hidden="true" data-prefix="fal" data-icon="info-circle" role="img"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                             class="svg-inline--fa fa-info-circle fa-w-16 fa-2x">
+                          <path fill="currentColor"
+                                d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-36 344h12V232h-12c-6.627 0-12-5.373-12-12v-8c0-6.627 5.373-12 12-12h48c6.627 0 12 5.373 12 12v140h12c6.627 0 12 5.373 12 12v8c0 6.627-5.373 12-12 12h-72c-6.627 0-12-5.373-12-12v-8c0-6.627 5.373-12 12-12zm36-240c-17.673 0-32 14.327-32 32s14.327 32 32 32 32-14.327 32-32-14.327-32-32-32z"></path>
+                        </svg>
+                      </div>
+                      <div class="info-pop__content"><p>To receive the referral bonus, you will need to spend at least 50
+                        EOS tokens. Both you and the referring account will receive an extra 5% that will be allocated as
+                        soon as the transaction has been completed.</p></div>
+                    </div>
+                  </h4>
+                  <svg style="float: left; margin: -10px 0px 0 -60px;" aria-hidden="true" data-prefix="far" data-icon="network-wired" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-network-wired fa-w-20 newicon"><path fill="currentColor" d="M640 264v-16c0-8.84-7.16-16-16-16H344v-72h72c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32H224c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h72v72H16c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h104v72H64c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h160c17.67 0 32-14.33 32-32v-96c0-17.67-14.33-32-32-32h-56v-72h304v72h-56c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h160c17.67 0 32-14.33 32-32v-96c0-17.67-14.33-32-32-32h-56v-72h104c8.84 0 16-7.16 16-16zM240 48h160v64H240V48zm-32 352v64H80v-64h128zm352 0v64H432v-64h128z" class=""></path></svg>
+                  <h4><span id="presaleBal">{{userEosInfo | number}} TRYBE</span></h4>
+                  <img class="eos-icon" src="./assets/img/trybe-icon.png" alt="EOS-icon" style="float: right;margin-top: -50px;margin-right: 30px;">
+                </div>
+                <div class="float-left balance-image-wraper"><i class="fa fa-lock"></i></div>
+              </div>
+              <button [disabled]="isActiveButton" (click)="createLink()" id="refGen" type="button" class="btn btn-primary btn-light waves-effect waves-light btn-block mt-2">
+                Generate Referral Link
+
+              </button>
+              <div class="ref-link">
+                <div id="refLink" *ngIf="showRef" class="black border p-4">{{refLink}}<button class="copy_button" ngxClipboard [cbContent]="refLink"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="name" class="col-xs-12 col-md-6 col-lg-6">
+            <div class="card-box tilebox-one tilebox-small">
+              <div class="m-b-20 black font18 clearfix balance-box liquid-balance-box">
+                <div class="balance-title">
+                  <h4 class="title-dark">Liquid Balance</h4>
+                  <h4><span id="accountBal">{{liquid | number}} EOS</span></h4>
+                  <img class="eos-icon" src="./assets/img/2000-px-eosio-logo@2x.png" alt="EOS-icon" style="float: right;margin: -55px 0 0 0px;">
+                </div>
+                <svg style="margin-bottom: 20px;" aria-hidden="true" data-prefix="far" data-icon="wallet" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-wallet fa-w-16 newicon"><path fill="currentColor" d="M448 112V96c0-35.35-28.65-64-64-64H96C42.98 32 0 74.98 0 128v256c0 53.02 42.98 96 96 96h352c35.35 0 64-28.65 64-64V176c0-35.35-28.65-64-64-64zm16 304c0 8.82-7.18 16-16 16H96c-26.47 0-48-21.53-48-48V128c0-26.47 21.53-48 48-48h288c8.82 0 16 7.18 16 16v32H112c-8.84 0-16 7.16-16 16s7.16 16 16 16h336c8.82 0 16 7.18 16 16v240zm-80-160c-17.67 0-32 14.33-32 32s14.33 32 32 32 32-14.33 32-32-14.33-32-32-32z" class=""></path></svg>
+              </div>
+              <div class="clearfix balance-bars">
+                <div class="balance-bar">
+                  <div class="m-b-20 balance-title-wrap black clearfix">
+                    <div class="balance-title">
+                      <div><span class="liquid-icons"><img src="./assets/img/database.png"> </span><span>RAM</span></div>
+                      <span class="float-right percentage" id="ramAva">{{useram | bytes }}</span>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar balance-bar" id="ramProgress" role="progressbar" [style.width.%]="ramuse"
+                           aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p class="resource-value" id="ramResource">{{maxram | bytes }} remaining</p>
+                  </div>
+                </div>
+                <div class="balance-bar">
+                  <div class="m-b-20 balance-title-wrap black clearfix">
+                    <div class="balance-title">
+                      <div><span class="liquid-icons"><img src="./assets/img/cpu.png"> </span><span>CPU</span></div>
+                      <span class="float-right percentage" id="cpuAva">{{cpuuse | number}}%</span>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar balance-bar" id="cpuProgress" role="progressbar" [style.width.%]="cpuuse"
+                           aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p class="resource-value" id="cpuResource">{{maxcpu}} us remaining</p>
+                  </div>
+                </div>
+                <div class="balance-bar">
+                  <div class="m-b-20 balance-title-wrap black clearfix">
+                    <div class="balance-title">
+                      <div><span class="liquid-icons"><img src="./assets/img/network.png"> </span><span>NET</span></div>
+                      <span class="float-right percentage" id="netAva">{{usenet | bytes }}</span>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar balance-bar" id="netProgress" role="progressbar" [style.width.%]="netuse"
+                           aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p class="resource-value" id="networkResource">{{maxnet | bytes}} remaining</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-12 col-lg-12">
+            <div class="card-box tilebox-one coinmarketcap-box" *ngIf="statsReady">
+
+              <div class="coinmarketcap-col">
+                <h6 class="title-dark"><a
+                  href="https://coinmarketcap.com/currencies/eos/?utm_medium=widget&amp;utm_campaign=cmcwidget&amp;utm_source=localhost&amp;utm_content=eos"
+                  target="_blank">EOS (EOS)</a></h6>
+                <div class="coinmarketcap-col-bot">
+                  <div class="price coinmarketcap-price">
+                    <div>{{stats.data.quotes.USD.price | currency : 'USD' : 'symbol' : '1.0'}}</div>
+                    <div class="price-down"
+                         [ngClass]="{'positive' : stats.data.quotes.USD.percent_change_1h > 0, 'negative' : stats.data.quotes.USD.percent_change_1h < 0}">
+                      ({{stats.data.quotes.USD.percent_change_1h}})
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="coinmarketcap-col">
+                <h6 class="title-dark">Rank</h6>
+                <div class="coinmarketcap-col-bot">
+                  <div class="price">{{stats.data.rank}}</div>
+                </div>
+              </div>
+              <div class="coinmarketcap-col">
+                <h6 class="title-dark">Market Cap</h6>
+                <div class="coinmarketcap-col-bot">
+                  <div class="price">${{stats.data.quotes.USD.market_cap | thousandSuff : 2 }}</div>
+                </div>
+              </div>
+              <div class="coinmarketcap-col">
+                <h6 class="title-dark">Volume (24h)</h6>
+                <div class="coinmarketcap-col-bot">
+                  <div class="price">${{stats.data.quotes.USD.volume_24h | thousandSuff : 2 }}</div>
+                </div>
+              </div>
+              <div class="coinmarketcap-col">
+                <a href="https://coinmarketcap.com?utm_medium=widget&amp;utm_campaign=cmcwidget&amp;utm_source=localhost&amp;utm_content=eos"
+                   target="_blank"><img src="./assets/img/coinmarketcap-1.svg" alt=""></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-6 col-lg-6 col-xl-4"></div>
+    </div>
+	</div>
+
+	<div class="row mt-m">
+		<div class="col-sm-12">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item"><a class="nav-link tab-links " id="top10-tab" data-toggle="tab"
+				                        role="tab" aria-controls="top10tab" [ngClass]="topone ? 'active' : ''" aria-selected="true" (click)="topOneChange()">Top 10 This Month</a></li>
+				<li class="nav-item"><a class="nav-link tab-links" [ngClass]="toptwo ? 'active' : ''" id="top20-tab" data-toggle="tab" role="tab"
+				                        aria-controls="top20tab" aria-selected="false" (click)="topTwoChange()">Top 20 All Time</a></li>
+        <li class="nav-item"><a class="nav-link tab-links" [ngClass]="winners ? 'active' : ''" id="winners" data-toggle="tab" role="tab"
+                                aria-controls="winners" aria-selected="false" (click)="openWinners()">Last Months Winners</a></li>
+      </ul>
+			<div class="tab-content" id="topChartContent">
+				<div class="tab-pane fade show active" id="top10tab" *ngIf="topone" role="tabpanel" aria-labelledby="top10-tab">
+					<div id="top10_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+						<div class="row">
+							<table id="top10" class="table text-black-50 dataTable no-footer" cellspacing="0" width="100%"
+							       style="height:200px" role="grid">
+								<thead>
+								<tr role="row">
+									<th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Rank" style="width: 10px;">Rank</th>
+									<th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Account" style="width: 50px;">
+										Account
+									</th>
+									<th class="sorting_desc" rowspan="1" colspan="1" aria-label="EOS Amount" style="width: 100px;">EOS
+										Amount
+									</th>
+									<th class="sorting_disabled" rowspan="1" colspan="1" aria-label="TRYBE Amount" style="width: 100px;">
+										TRYBE Amount
+									</th>
+                  <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="TRYBE Amount" style="width: 100px;">
+                    Bonus TRYBE
+                  </th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr role="row" class="odd" *ngFor="let item of top | slice:0:10; let i = index; ">
+									<td><b>{{i + 1}}</b></td>
+									<td><b>{{item.owner}}</b></td>
+									<td *ngIf="!isMobile" class="sorting_1"><b>{{item.eos_amount | number : '1.4-4' }} EOS</b></td>
+                  <td class="sorting_1" *ngIf="isMobile"><b>{{item.mobile_eos | number : '1.2-2' }} EOS</b></td>
+									<td *ngIf="!isMobile"><b>{{item.trybe_amount | number : '1.4-4' }} TRYBE</b></td>
+                  <td *ngIf="isMobile"><b>{{item.mobile_trybe | number : '1.2-2'}} TRYBE</b></td>
+                  <td><b>{{item.bonus | thousandSuff : 2}}</b></td>
+                </tr>
+
+								</tbody>
+							</table>
+							<div class="col-xl-12"></div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="top20tab" *ngIf="toptwo" role="tabpanel" aria-labelledby="top20-tab">
+					<div id="top20_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+						<div class="row">
+							<table id="top20" class="table text-black-50 dataTable no-footer" cellspacing="0" width="100%"
+							       role="grid">
+								<thead>
+								<tr role="row">
+									<th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Rank" style="width: 20px;">Rank</th>
+									<th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Account" style="width: 100px;">
+										Account
+									</th>
+									<th class="sorting_desc" rowspan="1" colspan="1" aria-label="EOS Amount" style="width: 100px;">EOS
+										Amount
+									</th>
+									<th class="sorting_disabled" rowspan="1" colspan="1" aria-label="TRYBE Amount" style="width: 100px;">
+										TRYBE Amount
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr role="row" class="odd" *ngFor="let item of userRow | slice:0:20; let i = index;">
+									<td><b>{{i + 1}}</b></td>
+									<td><b>{{item.owner}}</b></td>
+                  <td *ngIf="!isMobile" class="sorting_1"><b>{{item.eos_amount}}</b></td>
+                  <td class="sorting_1" *ngIf="isMobile"><b>{{item.mobile_eos | number : '1.2-2' }} EOS</b></td>
+                  <td *ngIf="!isMobile"><b>{{item.trybe_amount}}</b></td>
+                  <td *ngIf="isMobile"><b>{{item.mobile_trybe | number : '1.2-2'}} TRYBE</b></td>
+								</tr>
+								</tbody>
+							</table>
+							<div class="col-xl-12"></div>
+						</div>
+					</div>
+				</div>
+        <div class="tab-pane fade" *ngIf="winners" role="tabpanel" aria-labelledby="winners">
+          <div  class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+            <div class="row">
+              <table  class="table text-black-50 dataTable no-footer" cellspacing="0" width="100%"
+                     role="grid">
+                <thead>
+                <tr role="row">
+                  <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Rank" style="width: 10px;">Rank</th>
+                  <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Account" style="width: 100px;">
+                    Account
+                  </th>
+                  <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="TRYBE Amount" style="width: 100px;">
+                    TRYBE Amount
+                  </th>
+                  <th class="sorting_desc" rowspan="1" colspan="1" aria-label="EOS Amount" style="width: 100px;">EOS
+                    Transaction
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr role="row" class="odd">
+                  <td><b>1</b></td>
+                  <td><b>newt2222xxxx</b></td>
+                  <td class="sorting_1"><b>191820 TRYBE</b></td>
+                  <td><b><img class="eos-icon" src="./assets/img/bloks.png" alt="EOS-icon"><a target="_blank" href="https://bloks.io/transaction/befaeab89dd8740cc89a407ebcab14923ba32e4b0a4069d08f0237f60047b9d9">view transaction on bloks.io</a> </b></td>
+                </tr>
+                <tr role="row" class="odd">
+                  <td><b>2</b></td>
+                  <td><b>hazdmnjvg4ge</b></td>
+                  <td class="sorting_1"><b>142670 TRYBE</b></td>
+                  <td><b><img class="eos-icon" src="./assets/img/bloks.png" alt="EOS-icon"><a target="_blank" href="https://bloks.io/transaction/f988e6948c9d0249257efb47267e743f8f931b7790f1d835e46a90ce31e5b7e6">view transaction on bloks.io</a> </b></td>
+                </tr>
+                <tr role="row" class="odd">
+                  <td><b>3</b></td>
+                  <td><b>balazsdancso</b></td>
+                  <td class="sorting_1"><b>114430 TRYBE</b></td>
+                  <td><b><img class="eos-icon" src="./assets/img/bloks.png" alt="EOS-icon"><a target="_blank" href="https://bloks.io/transaction/0398023d70c8026984b144f499f5e5be7d9df928b37a41b2ce83f147c141af55">view transaction on bloks.io</a> </b></td>
+                </tr>
+                <tr role="row" class="odd">
+                  <td><b>4</b></td>
+                  <td><b>g44dknrtgage</b></td>
+                  <td class="sorting_1"><b>114430 TRYBE</b></td>
+                  <td><b><img class="eos-icon" src="./assets/img/bloks.png" alt="EOS-icon"><a target="_blank" href="https://bloks.io/transaction/0398023d70c8026984b144f499f5e5be7d9df928b37a41b2ce83f147c141af55">view transaction on bloks.io</a> </b></td>
+                </tr>
+                <tr role="row" class="odd">
+                  <td><b>5</b></td>
+                  <td><b>starcitizen1</b></td>
+                  <td class="sorting_1"><b>91230 TRYBE</b></td>
+                  <td><b><img class="eos-icon" src="./assets/img/bloks.png" alt="EOS-icon"><a target="_blank" href="https://bloks.io/transaction/005d7e6723951402205e48189535c59e305390f550766c405b5a9dd233b69425">view transaction on bloks.io</a> </b></td>
+                </tr>
+                <tr role="row" class="odd">
+                  <td><b>6</b></td>
+                  <td><b>gm3daobygege</b></td>
+                  <td class="sorting_1"><b>77570 TRYBE</b></td>
+                  <td><b><img class="eos-icon" src="./assets/img/bloks.png" alt="EOS-icon"><a target="_blank" href="https://bloks.io/transaction/d0931c78132a547d7dfdf35a184dff2f2ad749e61abf01dc5c6b31db1706cd63">view transaction on bloks.io</a> </b></td>
+                </tr>
+                <tr role="row" class="odd">
+                  <td><b>7</b></td>
+                  <td><b>geydenjsgmge</b></td>
+                  <td class="sorting_1"><b>73040 TRYBE</b></td>
+                  <td><b><img class="eos-icon" src="./assets/img/bloks.png" alt="EOS-icon"><a target="_blank" href="https://bloks.io/transaction/080a7123932a4350e4b0dffeac58ef9f82f7bbe8739860f91aca919db432efbc">view transaction on bloks.io</a> </b></td>
+                </tr>
+                <tr role="row" class="odd">
+                  <td><b>8</b></td>
+                  <td><b>linxia353222</b></td>
+                  <td class="sorting_1"><b>71420 TRYBE</b></td>
+                  <td><b><img class="eos-icon" src="./assets/img/bloks.png" alt="EOS-icon"><a target="_blank" href="https://bloks.io/transaction/f7543d320f382a2e0e4a34d3f10a00ba865bdc37b9cdaa601f7b4bbe628072b7">view transaction on bloks.io</a> </b></td>
+                </tr>
+                <tr role="row" class="odd">
+                  <td><b>9</b></td>
+                  <td><b>myneweosname</b></td>
+                  <td class="sorting_1"><b>69050 TRYBE</b></td>
+                  <td><b><img class="eos-icon" src="./assets/img/bloks.png" alt="EOS-icon"><a target="_blank" href="https://bloks.io/transaction/52397dbb7ce1d49029432b6674eff3475b9c068ae7e48d19285bf7fe19d947b0">view transaction on bloks.io</a> </b></td>
+                </tr>
+                <tr role="row" class="odd">
+                  <td><b>10</b></td>
+                  <td><b>gmztqnzxgmge</b></td>
+                  <td class="sorting_1"><b>64050 TRYBE</b></td>
+                  <td><b><img class="eos-icon" src="./assets/img/bloks.png" alt="EOS-icon"><a target="_blank" href="https://bloks.io/transaction/e4878329d427ced20e2489ff9a398b3e3f988c622dc9822866b36325f0a124d7">view transaction on bloks.io</a> </b></td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="col-xl-12"></div>
+            </div>
+          </div>
+        </div>
+			</div>
+		</div>
+	</div>
+</div>

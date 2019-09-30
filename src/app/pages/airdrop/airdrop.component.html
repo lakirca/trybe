@@ -1,0 +1,122 @@
+<div class="row">
+  <div class="col-xs-12 col-lg-12">
+    <div class="card-box ilebox-one" style="margin-top: 20px;">
+      <p>Over the next 12 months, we will be conducting 12 airdrops. On the 11th of each month starting on December the 11th, we will be airdropping tokens to your EOS account based on how many tokens you already hold. It doesn’t matter where your tokens are, we will be airdropping to you as a way to reward those who have supported our journey and contributed to the ecosystem!</p>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <h3 style="margin-top: 20px;">Next Snapshot happening in</h3>
+    <countdown [text]="text" units="Days | Hours | Minutes | Seconds"  [end]="countTimer">
+    </countdown>
+    <div class="card-box tilebox-one">
+      <h3>Total On Chain TRYBE: {{total | number : '1.4-4'}}</h3>
+      <br>
+      <h3>Total Off Chain TRYBE: {{offchain | number : '1.4-4'}}</h3>
+    </div>
+    <div class="card-box tilebox-one">
+      <h3>Last snapshot block</h3>
+      <br>
+      <img class="eos-icon" src="./assets/img/bloks.png" alt="EOS-icon"><a style="color:#fff;" target="_blank" href="https://bloks.io/block/31451000">31451000  view on bloks.io</a>
+    </div>
+    <div class="card-box tilebox-one">
+      <div *ngIf="name">
+        <h3>Your expected Airdrop amount will be: {{allUser | number: '1.4-4' }}</h3>
+        <h3>You are recieving : {{totalUser | number}}%</h3>
+      </div>
+      <br>
+      <button (click)="claimTokens()" [disabled]="!button" class="btn btn-primary waves-effect waves-light btn-block">Claim Tokens</button>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <h3 style="margin: 20px 0 -20px 0;">Airdrop dates</h3>
+    <div class="tab-content" id="topChartContent" style="margin-top: 30px;">
+      <div class="tab-pane fade show active" id="top10tab" role="tabpanel" aria-labelledby="top10-tab">
+        <div id="top10_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+          <div class="row">
+            <table id="top10" class="table text-black-50 dataTable no-footer" cellspacing="0" width="100%"
+                   style="height:200px;margin-top:10px;" role="grid">
+              <thead>
+              <tr role="row">
+                <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Rank" style="width: 10px;"></th>
+                <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Rank" style="width: 10px;">Date</th>
+                <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Account" style="width: 50px;">
+                  Amount
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr role="row" class="odd" >
+                <td><b>1</b></td>
+                <td><b>11th December</b></td>
+                <td><b>10M TRYBE</b></td>
+              </tr>
+              <tr role="row" class="even" >
+                <td><b>2</b></td>
+                <td><b>11th January</b></td>
+                <td><b>7M TRYBE</b></td>
+              </tr>
+              <tr role="row" class="odd" >
+                <td><b>3</b></td>
+                <td><b>11th February</b></td>
+                <td><b>7M TRYBE</b></td>
+              </tr>
+              <tr role="row" class="even" >
+                <td><b>4</b></td>
+                <td><b>11th March</b></td>
+                <td><b>7M TRYBE</b></td>
+              </tr>
+              <tr role="row" class="odd" >
+                <td><b>5</b></td>
+                <td><b>11th April</b></td>
+                <td><b>7M TRYBE</b></td>
+              </tr>
+              <tr role="row" class="even" >
+                <td><b>6</b></td>
+                <td><b>11th May</b></td>
+                <td><b>7M TRYBE</b></td>
+              </tr>
+              <tr role="row" class="odd" >
+                <td><b>7</b></td>
+                <td><b>11th June</b></td>
+                <td><b>7M TRYBE</b></td>
+              </tr>
+              <tr role="row" class="odd" >
+                <td><b>8</b></td>
+                <td><b>11th July</b></td>
+                <td><b>7M TRYBE</b></td>
+              </tr>
+              <tr role="row" class="even" >
+                <td><b>10</b></td>
+                <td><b>11th August</b></td>
+                <td><b>7M TRYBE</b></td>
+              </tr>
+              <tr role="row" class="odd" >
+                <td><b>11</b></td>
+                <td><b>11th September</b></td>
+                <td><b>7M TRYBE</b></td>
+              </tr>
+              <tr role="row" class="even" >
+                <td><b>12</b></td>
+                <td><b>11th October</b></td>
+                <td><b>7M TRYBE</b></td>
+              </tr>
+              <tr role="row" class="odd" >
+                <td><b>13</b></td>
+                <td><b>11th November</b></td>
+                <td><b>7M TRYBE</b></td>
+              </tr>
+              <tr role="row" class="even" >
+                <td><b>14</b></td>
+                <td><b>11th December</b></td>
+                <td><b>7M TRYBE</b></td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="col-xl-12"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

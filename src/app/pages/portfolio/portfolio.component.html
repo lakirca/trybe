@@ -1,0 +1,84 @@
+<div>
+	<div class="portfolio-header-container">
+		<span class="portfolio-header"> Our Portfolio Plans</span>
+		<mat-chip-list>
+			<mat-chip *ngIf="name" class="portfolio-chip-back" routerLink="/chart">
+				Back to graph
+			</mat-chip>
+		</mat-chip-list>
+	</div>
+	<div class="portfolio-grid-container">
+		<div class="container-header">
+			<p class="container-text">Once you have stacked the correct number of tokens, please click "subscribe" to start tracking your portfolio.</p>
+			<p class="container-text">Please note: if you unstake required for this service, your portfolio data will be lost.</p>
+		</div>
+		<mat-grid-list cols="3" rowHeight="100px" class="portfolio-grid">
+			<mat-grid-tile class="portfolio-grid-item">
+				<mat-card class="portfolio-card">
+					<mat-card-header class="portfolio-card-header">BRONZE PLAN</mat-card-header>
+					<mat-card-content>
+						<div class="portfolio-card-content-element">
+							<p class="content-element-header">Snapshots</p>
+							<p class="content-element-text">Every 24 hours</p>
+						</div>
+						<div class="portfolio-card-content-element">
+							<p class="content-element-header">Longest period</p>
+							<p class="content-element-text">3 months</p>
+						</div>
+						<div class="portfolio-card-content-element">
+							<p class="content-element-header">Cost</p>
+							<p class="content-element-text">10.000 TRYBE stacked</p>
+						</div>
+					</mat-card-content>
+					<mat-card-footer>
+						<button mat-button>subscribe</button>
+					</mat-card-footer>
+				</mat-card>
+			</mat-grid-tile>
+			<mat-grid-tile class="portfolio-grid-item">
+				<mat-card class="portfolio-card">
+					<mat-card-header class="portfolio-card-header">Silver PLAN</mat-card-header>
+					<mat-card-content>
+						<div class="portfolio-card-content-element">
+							<p class="content-element-header">Snapshots</p>
+							<p class="content-element-text">Every 12 hours</p>
+						</div>
+						<div class="portfolio-card-content-element">
+							<p class="content-element-header">Longest period</p>
+							<p class="content-element-text">6 months</p>
+						</div>
+						<div class="portfolio-card-content-element">
+							<p class="content-element-header">Cost</p>
+							<p class="content-element-text">20.000 TRYBE stacked</p>
+						</div>
+					</mat-card-content>
+					<mat-card-footer>
+						<button mat-button>subscribe</button>
+					</mat-card-footer>
+				</mat-card>
+			</mat-grid-tile>
+			<mat-grid-tile class="portfolio-grid-item">
+				<mat-card class="portfolio-card">
+					<mat-card-header class="portfolio-card-header">Gold PLAN</mat-card-header>
+					<mat-card-content>
+						<div class="portfolio-card-content-element">
+							<p class="content-element-header">Snapshots</p>
+							<p class="content-element-text">Every 6 hours</p>
+						</div>
+						<div class="portfolio-card-content-element">
+							<p class="content-element-header">Longest period</p>
+							<p class="content-element-text">12 months</p>
+						</div>
+						<div class="portfolio-card-content-element">
+							<p class="content-element-header">Cost</p>
+							<p class="content-element-text">40.000 TRYBE stacked</p>
+						</div>
+					</mat-card-content>
+					<mat-card-footer>
+						<button mat-button>subscribe</button>
+					</mat-card-footer>
+				</mat-card>
+			</mat-grid-tile>
+		</mat-grid-list>
+	</div>
+</div>

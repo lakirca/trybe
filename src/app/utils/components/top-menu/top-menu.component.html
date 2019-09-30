@@ -1,0 +1,169 @@
+<!-- <div id="topnav"> -->
+<!-- <img class="logo" src="./assets/img/logo.svg"> -->
+<!-- <div class="menu-toggle" (click)="menuToggle()">Menu</div> -->
+<!-- <div class="topbar-main" [ngClass]="menuToggled ? 'opened' : 'closed'"> -->
+<!-- <ul class="navigation-menu" id="navigation"> -->
+<!-- <li> -->
+<!-- <a href="#" onclick="location.reload()" id="reloadData" style=""> -->
+<!-- <mat-icon>refresh</mat-icon> -->
+<!-- <span>Refresh Data</span> -->
+<!-- </a> -->
+<!-- </li> -->
+<!--
+  <li class="list-inline-item"><a routerLink="/home" (click)="menuToggle()" class="nav-link waves-effect inline" role="button"
+-->
+<!-- aria-haspopup="false" -->
+<!--
+  aria-expanded="false" id="link1" data-box="presale-section"><span>Pre-sale</span></a>
+-->
+<!-- </li> -->
+<!--
+  &lt;!&ndash;<li class="list-inline-item"><a href="#" (click)="menuToggle()" class="nav-link waves-effect inline" role="button" aria-haspopup="false"&ndash;&gt;
+-->
+<!--
+  &lt;!&ndash;aria-expanded="false" id="staking" routerLink="/staking"&ndash;&gt;
+-->
+<!--
+  &lt;!&ndash;data-box="staking-section"><span>Staking</span></a>&ndash;&gt;
+-->
+<!-- &lt;!&ndash;</li>&ndash;&gt; -->
+<!--
+  &lt;!&ndash;<li class="list-inline-item"><a routerLink="/home" (click)="menuToggle()" class="nav-link waves-effect inline isDisabled" role="button"&ndash;&gt;
+-->
+<!--
+  &lt;!&ndash;aria-haspopup="false" aria-expanded="false" id="vp"&ndash;&gt;
+-->
+<!--
+  &lt;!&ndash;data-box="voting-portal"><span>Voting Portal</span></a></li>&ndash;&gt;
+-->
+<!--
+  &lt;!&ndash;<li  class="list-inline-item"><a routerLink="/home" (click)="menuToggle()" class="nav-link waves-effect inline isDisabled" role="button"&ndash;&gt;
+-->
+<!--
+  &lt;!&ndash;aria-haspopup="false" aria-expanded="false" id="link3"><span>Wallet</span></a>&ndash;&gt;
+-->
+<!-- &lt;!&ndash;</li>&ndash;&gt; -->
+<!-- <li *ngIf="tester" class="list-inline-item"> -->
+<!--
+  <a href="#" class="nav-link waves-effect inline isDisabled" (click)="menuToggle()" routerLink="/chart"
+-->
+<!-- role="button" aria-haspopup="false" aria-expanded="false" id="link5"> -->
+<!-- <span>Portfolio</span> -->
+<!-- </a> -->
+<!-- </li> -->
+<!-- <li  class="list-inline-item"> -->
+<!--
+  <a href="#" class="nav-link waves-effect inline isDisabled" (click)="menuToggle()" routerLink="/airdrop"
+-->
+<!-- role="button" aria-haspopup="false" aria-expanded="false" id="link3"> -->
+<!-- <span>Air Drops</span> -->
+<!-- </a> -->
+<!-- </li> -->
+<!--
+  &lt;!&ndash;<li *ngIf="founder" class="list-inline-item last-elements">&ndash;&gt;
+-->
+<!--
+  &lt;!&ndash;<a routerLink="/founders" href="#" class="nav-link waves-effect inline isDisabled" role="button">&ndash;&gt;
+-->
+<!-- &lt;!&ndash;<span>Founders</span>&ndash;&gt; -->
+<!-- &lt;!&ndash;</a>&ndash;&gt; -->
+<!-- &lt;!&ndash;</li>&ndash;&gt; -->
+<!-- <li class="list-inline-item last-elements"> -->
+<!--
+  <a routerLink="/founders" href="#" class="nav-link waves-effect inline isDisabled" role="button">
+-->
+<!-- <span>Founders</span> -->
+<!-- </a> -->
+<!-- </li> -->
+<!-- </ul> -->
+
+<!-- <div class="menu-extras navbar-topbar"> -->
+<!-- <ul class="list-inline float-right mb-0"> -->
+<!-- <li class="list-inline-item"> -->
+<!-- <a class="navbar-toggle"> -->
+<!-- <div class="lines"><span></span> <span></span> <span></span></div> -->
+<!-- </a> -->
+<!-- </li> -->
+<!-- <li class="list-inline-item dropdown notification-list"> -->
+<!-- <mat-chip-list *ngIf="name" class="name-chip-list"> -->
+<!-- <mat-chip [matMenuTriggerFor]="menu" class="name-chip"> -->
+<!-- {{name}} -->
+<!-- </mat-chip> -->
+<!-- <mat-menu #menu="matMenu"> -->
+<!-- <button mat-menu-item *ngIf="name" (click)="logout()">LOGOUT</button> -->
+<!-- </mat-menu> -->
+<!-- <br> -->
+<!-- </mat-chip-list> -->
+<!-- <div class="header-scatter-login"> -->
+<!-- <div> -->
+<!--
+  <button mat-button (click)="name ? logout() : login()" *ngIf="!name">{{name ? "LOGOUT" : "Login with Scatter"}}
+-->
+<!-- </button> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- <div *ngIf="isMobile" class="header-scatter-login"> -->
+<!-- <div> -->
+<!--
+  <button mat-button (click)="name ? logout() : login()" *ngIf="!name">{{name ? "LOGOUT" : "Login with Lynx"}}
+-->
+<!-- </button> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </li> -->
+<!-- </ul> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
+<div class="top-menu-bar">
+  <img class="logo" src="./assets/img/logo.svg" style="width: 100px;" />
+  <div class="menu-toggle" (click)="menuToggle()">Menu</div>
+  <div class="topbar-main">
+    <ul class="navigation-menu">
+      <li>
+        <a href="#" onclick="location.reload()" id="reloadData" style="">
+          <mat-icon>refresh</mat-icon>
+          <span>Refresh Data</span>
+        </a>
+      </li>
+      <li><a href="http://trybe.one/">Home</a></li>
+      <li><a routerLink="/">Pre sale</a></li>
+      <!-- <li><a href="https://wallet.trybe.one/">Wallet</a></li> -->
+      <li><a href="#" routerLink="/chart">Portfolio(Beta)</a></li>
+      <li><a href="#" routerLink="/airdrop">Air Drops</a></li>
+      <li><a *ngIf="founder" href="#" routerLink="/founders">Founders</a></li>
+    </ul>
+  </div>
+  <div class="mobile-menu" [ngClass]="menuToggled ? 'opened' : 'closed'">
+    <ul>
+      <li>
+        <a href="#" onclick="location.reload()" id="reloadData" style="">
+          <mat-icon>refresh</mat-icon>
+          <span>Refresh Data</span>
+        </a>
+      </li>
+      <li><a (click)="menuToggle()" href="http://trybe.one/">Home</a></li>
+      <li><a (click)="menuToggle()" routerLink="/">Pre sale</a></li>
+      <!-- <li><a href="https://wallet.trybe.one/">Wallet</a></li> -->
+      <li>
+        <a (click)="menuToggle()" href="#" routerLink="/chart"
+          >Portfolio(Beta)</a
+        >
+      </li>
+      <li>
+        <a (click)="menuToggle()" href="#" routerLink="/airdrop"
+          >Air Drops</a
+        >
+      </li>
+      <li>
+        <a
+          (click)="menuToggle()"
+          *ngIf="founder"
+          href="#"
+          routerLink="/founders"
+          >Founders</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>

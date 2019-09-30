@@ -1,0 +1,103 @@
+<div>
+	<div class="portfolio-grid-container">
+		<mat-grid-list cols="3" rowHeight="400px" class="portfolio-grid">
+			<mat-grid-tile class="portfolio-grid-item">
+				<mat-card class="portfolio-card account">
+					<mat-card-header class="portfolio-card-header">Account Details</mat-card-header>
+					<mat-card-content>
+            <div class="portfolio-card-content-element liquid">
+              <p class="content-element-header">Liquid Balance</p>
+              <p class="content-element-text">{{liquid}}</p>
+            </div>
+						<div class="portfolio-card-content-element">
+							<p class="content-element-header">Staked</p>
+							<p class="content-element-text">{{staked ? staked : "0" | number}} TRYBE</p>
+						</div>
+						<div class="portfolio-card-content-element">
+							<p class="content-element-header">Delegated</p>
+							<p class="content-element-text">0 TRYBE</p>
+						</div>
+						<div class="portfolio-card-content-element">
+							<p class="content-element-header">Presale</p>
+							<p class="content-element-text">{{userEosInfo ? userEosInfo : "0" | number}}</p>
+						</div>
+            <div class="portfolio-card-content-element">
+              <p class="content-element-header">Off Chain</p>
+              <p class="content-element-text">0 TRYBE</p>
+            </div>
+					</mat-card-content>
+					<mat-card-footer>
+						<button mat-button>Stake</button>
+            <button mat-button class="unstake">Unstake</button>
+					</mat-card-footer>
+				</mat-card>
+			</mat-grid-tile>
+			<mat-grid-tile class="portfolio-grid-item info">
+				<mat-card class="portfolio-card">
+					<mat-card-content>
+						<div class="portfolio-card-content-element">
+							<p class="content-element-header">Upcoming Airdrop:</p>
+							<p class="content-element-text">December 11th, 2018</p>
+						</div>
+						<div class="portfolio-card-content-element">
+							<p class="content-element-header">Airdrop Amount:</p>
+							<p class="content-element-text">10,000,000</p>
+						</div>
+						<div class="portfolio-card-content-element">
+							<p class="content-element-header">Total Staked Trybe:</p>
+							<p class="content-element-text">0</p>
+						</div>
+            <div class="portfolio-card-content-element">
+              <p class="content-element-header">Your Share:</p>
+              <p class="content-element-text">0</p>
+            </div>
+            <div class="portfolio-card-content-element">
+              <p class="content-element-header">Current Trybe Payout:</p>
+              <p class="content-element-text">0</p>
+            </div>
+            <div class="portfolio-card-content-element">
+              <p class="content-element-description">
+                Each month in 2019 we will airdrop 3M tokens. The amount you receive will be based on how many tokens you have staked for the entire previous month.
+                <br><br>
+                NOTE: Founders tokens will not be included in the airdrop.
+
+              </p>
+            </div>
+					</mat-card-content>
+				</mat-card>
+			</mat-grid-tile>
+			<mat-grid-tile class="portfolio-grid-item">
+				<mat-card class="portfolio-card account">
+					<mat-card-header class="portfolio-card-header">Account Details</mat-card-header>
+					<mat-card-content>
+            <div class="portfolio-card-content-element liquid">
+              <p class="content-element-header">Liquid Balance</p>
+              <p class="content-element-text">{{liquid}}</p>
+            </div>
+            <div style="padding:20px;border-radius:5px;height:100%" class="bg-white">
+              <div class="divider"></div>
+              <p class="m-b-20 black" style="margin-bottom:5px!important"><img src="./assets/img/database.png"> <span>RAM Usage:</span> <span class="float-right" id="ramAva">{{ramuse | number }}%</span></p>
+              <p style="margin-bottom:5px;color:#626262">Used : {{useram | bytes }} Free : {{freeram | bytes }}</p>
+              <div class="progress" style="height:10px!important;background-color:#dadada">
+                <div class="progress-bar" id="ramProgress" role="progressbar" [style.width.%]="ramuse"  aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <p></p>
+              <p class="m-b-20 black" style="margin-bottom:5px!important"><img src="./assets/img/cpu.png"> <span>CPU Usage:</span> <span class="float-right" id="cpuAva">{{cpuuse | number }}%</span></p>
+              <p style="margin-bottom:5px;color:#626262">Used : {{usecpu}} Free : {{freecpu}}</p>
+              <div class="progress" style="height:10px!important;background-color:#dadada">
+                <div class="progress-bar" id="cpuProgress" [style.width.%]="cpuuse" role="progressbar"  aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <p></p>
+              <p class="m-b-20 black" style="margin-bottom:5px!important"><img src="./assets/img/network.png"> <span>NET Usage:</span> <span class="float-right" id="netAva">{{netuse | number}}%</span></p>
+              <p style="margin-bottom:5px;color:#626262">Used : {{usenet | bytes }} Free : {{freenet | bytes }}</p>
+              <div class="progress" style="height:10px!important;background-color:#dadada">
+                <div class="progress-bar" id="netProgress" [style.width.%]="netuse" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <p></p>
+            </div>
+					</mat-card-content>
+				</mat-card>
+			</mat-grid-tile>
+		</mat-grid-list>
+	</div>
+</div>

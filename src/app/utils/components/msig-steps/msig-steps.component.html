@@ -1,0 +1,240 @@
+<mat-accordion class="example-headers-align">
+
+	<mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+		<mat-expansion-panel-header>
+			<mat-panel-title>
+				Create propose
+			</mat-panel-title>
+			<mat-panel-description>
+				Creation propose to msig contract
+				<mat-icon>create</mat-icon>
+			</mat-panel-description>
+		</mat-expansion-panel-header>
+
+		<form [formGroup]="formPropose" (ngSubmit)="propose()" novalidate>
+			<mat-list>
+				<mat-list-item>
+					<mat-label>Code:</mat-label>
+					<mat-form-field disabled="true">
+						<input matInput placeholder="Code name for transaction exec" formControlName="code">
+					</mat-form-field>
+				</mat-list-item>
+				<mat-list-item>
+					<mat-label>Action:</mat-label>
+					<mat-form-field>
+						<input matInput placeholder="Action name" formControlName="action">
+					</mat-form-field>
+				</mat-list-item>
+				<mat-list-item>
+					<mat-label>Parameters:</mat-label>
+					<mat-chip-list #chipList class="chip-list-propose-params">
+						<mat-chip *ngFor="let param of params" [selectable]="selectable"
+						          [removable]="removableParams" (removed)="removeParam(param)">
+							{{param.name}}
+							<mat-icon matChipRemove *ngIf="removableParams">cancel</mat-icon>
+						</mat-chip>
+						<input placeholder="New param..."
+						       [matChipInputFor]="chipList"
+						       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+						       [matChipInputAddOnBlur]="addOnBlur"
+						       (matChipInputTokenEnd)="addParam($event)">
+					</mat-chip-list>
+				</mat-list-item>
+				<mat-list-item>
+					<mat-label>Confidants:</mat-label>
+					<mat-chip-list #chipList class="chip-list-propose">
+						<mat-chip *ngFor="let confidant of confidants" [selectable]="selectable"
+						          [removable]="removable" (removed)="removeConfidant(confidant)">
+							{{confidant.name}}
+							<mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+						</mat-chip>
+						<input placeholder="New confidant..."
+						       readonly
+						       [matChipInputFor]="chipList"
+						       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+						       [matChipInputAddOnBlur]="addOnBlur"
+						       (matChipInputTokenEnd)="addConfidant($event)">
+					</mat-chip-list>
+				</mat-list-item>
+				<mat-list-item>
+					<mat-label>Proposal name:</mat-label>
+					<mat-form-field>
+						<input matInput placeholder="Proposal name" formControlName="proposalName">
+					</mat-form-field>
+				</mat-list-item>
+				<!--<mat-list-item>-->
+					<!--<mat-label>Expiration:</mat-label>-->
+					<!--<mat-form-field>-->
+						<!--<input matInput [matDatepicker]="myDatepicker" matInput placeholder="Date" formControlName="expirationDate">-->
+						<!--<mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>-->
+						<!--<mat-datepicker #myDatepicker></mat-datepicker>-->
+
+					<!--</mat-form-field>-->
+					<!--<mat-form-field class="expiration-time">-->
+						<!--<input matInput placeholder="hh:mm:ss" formControlName="expirationTime">-->
+					<!--</mat-form-field>-->
+				<!--</mat-list-item>-->
+			</mat-list>
+
+			<div class="div-to-button-msig">
+				<button mat-button class="button-msig" align="end" type="submit">
+					propose
+				</button>
+			</div>
+		</form>
+
+		<mat-action-row>
+			<button mat-button color="primary" (click)="nextStep()">Next</button>
+		</mat-action-row>
+	</mat-expansion-panel>
+
+	<mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+		<mat-expansion-panel-header>
+			<mat-panel-title>
+				Approve
+			</mat-panel-title>
+			<mat-panel-description>
+				Approve this multisignature transaction
+				<mat-icon>fingerprint</mat-icon>
+			</mat-panel-description>
+		</mat-expansion-panel-header>
+
+		<form [formGroup]="formApprove" (ngSubmit)="multisig('approve')" novalidate>
+			<mat-list>
+				<mat-list-item>
+					<mat-label>Proposal name:</mat-label>
+					<mat-form-field>
+						<input matInput placeholder="Proposal name" formControlName="proposalName">
+					</mat-form-field>
+				</mat-list-item>
+			</mat-list>
+
+			<div class="div-to-button-msig">
+				<button mat-button class="button-msig" align="end" type="submit">
+					Approve
+				</button>
+			</div>
+		</form>
+
+		<mat-action-row>
+			<button mat-button color="warn" (click)="prevStep()">Previous</button>
+			<button mat-button color="primary" (click)="nextStep()">Next</button>
+		</mat-action-row>
+	</mat-expansion-panel>
+
+	<mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+		<mat-expansion-panel-header>
+			<mat-panel-title>
+				Unapprove
+			</mat-panel-title>
+			<mat-panel-description>
+				Unapprove from this multisignature transaction
+				<mat-icon>clear_all</mat-icon>
+			</mat-panel-description>
+		</mat-expansion-panel-header>
+
+		<form [formGroup]="formUnapprove" (ngSubmit)="multisig('unapprove')" novalidate>
+			<mat-list>
+				<mat-list-item>
+					<mat-label>Proposal name:</mat-label>
+					<mat-form-field>
+						<input matInput placeholder="Proposal name" formControlName="proposalName">
+					</mat-form-field>
+				</mat-list-item>
+			</mat-list>
+
+			<div class="div-to-button-msig">
+				<button mat-button class="button-msig" align="end" type="submit">
+					Unapprove
+				</button>
+			</div>
+		</form>
+
+		<mat-action-row>
+			<button mat-button color="warn" (click)="prevStep()">Previous</button>
+			<button mat-button color="primary" (click)="nextStep()">Next</button>
+		</mat-action-row>
+	</mat-expansion-panel>
+
+	<mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
+		<mat-expansion-panel-header>
+			<mat-panel-title>
+				Exec
+			</mat-panel-title>
+			<mat-panel-description>
+				Exec this multisignature transaction
+				<mat-icon>done_all</mat-icon>
+			</mat-panel-description>
+		</mat-expansion-panel-header>
+
+		<form [formGroup]="formExec" (ngSubmit)="multisig('exec', 'executer')" novalidate>
+			<mat-list>
+				<mat-list-item>
+					<mat-label>Proposal name:</mat-label>
+					<mat-form-field>
+						<input matInput placeholder="Proposal name" formControlName="proposalName">
+					</mat-form-field>
+				</mat-list-item>
+
+				<mat-list-item>
+					<mat-label>Executer:</mat-label>
+					<mat-form-field>
+						<input matInput placeholder="Executer" formControlName="executer">
+					</mat-form-field>
+				</mat-list-item>
+			</mat-list>
+
+			<div class="div-to-button-msig">
+				<button mat-button class="button-msig" align="end" type="submit">
+					Exec
+				</button>
+			</div>
+		</form>
+
+		<mat-action-row>
+			<button mat-button color="warn" (click)="prevStep()">Previous</button>
+			<button mat-button color="primary" (click)="nextStep()">Next</button>
+		</mat-action-row>
+	</mat-expansion-panel>
+
+	<mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)" hideToggle>
+		<mat-expansion-panel-header>
+			<mat-panel-title>
+				Cancel
+			</mat-panel-title>
+			<mat-panel-description>
+				Remove this proposal
+				<mat-icon>delete_forever</mat-icon>
+			</mat-panel-description>
+		</mat-expansion-panel-header>
+
+		<form [formGroup]="formCancel" (ngSubmit)="multisig('cancel', 'canceler')" novalidate>
+			<mat-list>
+				<mat-list-item>
+					<mat-label>Proposal name:</mat-label>
+					<mat-form-field>
+						<input matInput placeholder="Proposal name" formControlName="proposalName">
+					</mat-form-field>
+				</mat-list-item>
+
+				<mat-list-item>
+					<mat-label>Canceler:</mat-label>
+					<mat-form-field>
+						<input matInput placeholder="Canceler" formControlName="canceler">
+					</mat-form-field>
+				</mat-list-item>
+			</mat-list>
+
+			<div class="div-to-button-msig">
+				<button mat-button class="button-msig" align="end" type="submit">
+					Cancel
+				</button>
+			</div>
+		</form>
+
+		<mat-action-row>
+			<button mat-button color="warn" (click)="prevStep()">Previous</button>
+			<button mat-button color="primary" (click)="finish()">End</button>
+		</mat-action-row>
+	</mat-expansion-panel>
+</mat-accordion>

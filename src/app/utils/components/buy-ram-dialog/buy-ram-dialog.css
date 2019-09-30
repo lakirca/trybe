@@ -1,0 +1,59 @@
+
+.title {
+  color: #fff;
+}
+
+button {
+  border: 2px solid #3e907a;
+  color: #3e907a;
+}
+
+input {
+  color: #fff;
+  width: 90%;
+  height: 40px;
+  background: none;
+  border: 2px solid #39816e;
+  border-radius: 5px;
+  margin: 20px 0 20px 0;
+}
+
+mat-card {
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  display: flex;
+  flex-direction: column;
+  border-radius: 2px;
+  position: relative;
+  box-shadow: initial!important;
+}
+
+mat-card-content{
+  flex-grow: 1;
+}
+
+mat-card-footer {
+  margin-bottom: 0;
+  bottom: 0;
+}
+
+.type {
+  /*color: #4dd4b6;*/
+  text-transform: uppercase;
+}
+
+mat-label{
+  color: white;
+}
+
+input{
+  color: white;
+  width: 100%;
+}
+
+::placeholder {
+  color: #fcfcfc;
+  opacity: 1;
+  padding: 5px 10px;
+}
